@@ -20,17 +20,16 @@ interface Dao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addMediaItems(mediaItems: List<MediaItemEntity>): Completable
 
+    @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addRentals(rentals: List<RentalEntity>): Completable
 
     /**
      * Used by the generator, deals directly with the media item entity.
      */
-    @Transaction
     @Query("select * from media_items")
     fun getAllMediaItems(): Single<List<MediaItemEntity>>
 
-    @Transaction
     @Query("select * from media_items where type = :mediaType")
     fun getAllItemsOfType(mediaType: MediaType): Single<List<MediaItemData>>
 
