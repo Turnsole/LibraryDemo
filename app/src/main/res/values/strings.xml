@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LibraryDemo</string>
+    <string name="media_item_details">%1$s, %2$d rentals</string>
+    <string name="search_summary">%1$d results for query of \"%2$s\"</string>
 </resources>
