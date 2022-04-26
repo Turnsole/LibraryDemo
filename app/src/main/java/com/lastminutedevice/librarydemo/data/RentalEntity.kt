@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "rentals")
 data class RentalEntity(
-    val mediaId: Int,
+    val rentalMediaId: Int,
     val userId: Int
 ) {
-    @PrimaryKey(autoGenerate = true) var id: Int? = null
+    @PrimaryKey(autoGenerate = true) var rentalId: Int? = null
 }

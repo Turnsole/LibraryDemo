@@ -7,7 +7,7 @@ import kotlin.random.Random
 
 class DataGenerator(private val dao: Dao, private val userId: Int) {
 
-    private val random = Random(1)
+    private val random = Random(System.currentTimeMillis())
 
     private val seedWords = listOf(
         "apple", "dirt", "brick", "ship", "storm", "softly", "waving", "deciduous"
@@ -37,7 +37,7 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
      */
     private fun generateItems(): Completable {
         val items = mutableListOf<MediaItemEntity>()
-        for (i in 1..50) {
+        for (i in 1..25) {
             val newItem = MediaItemEntity(
                 title = generateTitle(),
                 type = MediaType.values().random()
@@ -65,9 +65,9 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
                 val rentalList = mutableListOf<RentalEntity>()
                 // Generate a specific number of rentals, unevenly distributed among media items.
                 for (i in 0..50) {
-                    val itemId = list[random.nextInt(listSize)].id!!
+                    val itemId = list[random.nextInt(listSize)].mediaItemId!!
                     val rental = RentalEntity(
-                        mediaId = itemId,
+                        rentalMediaId = itemId,
                         userId = if (random.nextBoolean()) userId else userId + 1
                     )
                     rentalList.add(rental)

@@ -7,6 +7,6 @@ data class MediaItemData(
     @Embedded
     val mediaItem: MediaItemEntity,
 
-    @Relation(parentColumn = "id", entityColumn = "mediaId")
+    @Relation(parentColumn = "mediaItemId", entityColumn = "rentalMediaId")
     val rentals: List<RentalEntity>
 )

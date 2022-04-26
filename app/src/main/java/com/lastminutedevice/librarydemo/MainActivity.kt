@@ -18,7 +18,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
-    private val pretendUserId = 12234
+    private val pretendUserId = 123
 
     private val mediaItemAdapter = MediaItemAdapter(this)
 
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         val userOnly = findViewById<AppCompatCheckBox>(R.id.checkbox).isChecked
 
         val observable = if (userOnly) {
-            database.dao().getUsersRentals(mediaType = mediaType, userId = pretendUserId)
+            database.dao().getUsersRentals(mediaType = mediaType, userId = pretendUserId) // How is this returning results with 0 rentals?
         } else {
             database.dao().getAllItemsOfType(mediaType = mediaType)
         }

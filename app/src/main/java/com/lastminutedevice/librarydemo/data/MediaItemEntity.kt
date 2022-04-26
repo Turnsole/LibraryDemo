@@ -9,5 +9,5 @@ data class MediaItemEntity(
     val title: String,
     val type: MediaType
 ) {
-    @PrimaryKey(autoGenerate = true) var id: Int? = null
+    @PrimaryKey(autoGenerate = true) var mediaItemId: Int? = null
 }

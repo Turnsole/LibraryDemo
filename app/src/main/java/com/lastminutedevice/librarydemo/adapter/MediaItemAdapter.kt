@@ -36,7 +36,7 @@ class MediaItemAdapter(private val context: Context) : RecyclerView.Adapter<Medi
         holder.detailsView.run {
             text = resources.getString(
                 R.string.media_item_details,
-                itemData.mediaItem.id,
+                itemData.mediaItem.mediaItemId,
                 itemData.mediaItem.type,
                 itemData.rentals.size)
         }
