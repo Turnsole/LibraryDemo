@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">LibraryDemo</string>
+    <string name="checkbox_label">My Rentals Only</string>
     <string name="media_item_details">(#%1$d) %2$s, %3$d rentals</string>
     <string name="search_summary">%1$d results for query of \"%2$s\"</string>
 </resources>

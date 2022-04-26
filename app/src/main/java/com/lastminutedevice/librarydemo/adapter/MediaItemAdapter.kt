@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lastminutedevice.librarydemo.R
 import com.lastminutedevice.librarydemo.data.MediaItemData
 
-class ViewAdapter(private val context: Context) : RecyclerView.Adapter<MediaItemViewHolder>() {
+/**
+ * Adapter for all the items in the big list.
+ */
+class MediaItemAdapter(private val context: Context) : RecyclerView.Adapter<MediaItemViewHolder>() {
 
     private val data: MutableList<MediaItemData> = mutableListOf()
 

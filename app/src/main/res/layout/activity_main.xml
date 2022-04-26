@@ -14,24 +14,35 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="-15dp"
-        android:background="@color/teal_200"
-        app:layout_constraintBottom_toBottomOf="@id/search_bar"
+        android:background="#808080"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/search_bar"
-        android:layout_width="250dp"
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/dropdown_menu"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/checkbox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatCheckBox
-        android:id="@+id/checkbox"
+    <TextView
+        android:id="@+id/checkbox_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/checkbox_label"
+        app:layout_constraintEnd_toStartOf="@id/checkbox"
+        app:layout_constraintTop_toTopOf="@id/checkbox"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox"/>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkbox"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/dropdown_menu"/>
 
     <TextView
         android:id="@+id/search_summary"
