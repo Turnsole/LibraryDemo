@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         val userOnly = findViewById<AppCompatCheckBox>(R.id.checkbox).isChecked
 
         val observable = if (userOnly) {
-            database.dao().getUsersRentals(mediaType = mediaType, userId = pretendUserId) // How is this returning results with 0 rentals?
+            database.dao().getUsersRentals(mediaType = mediaType, userId = pretendUserId)
         } else {
             database.dao().getAllItemsOfType(mediaType = mediaType)
         }

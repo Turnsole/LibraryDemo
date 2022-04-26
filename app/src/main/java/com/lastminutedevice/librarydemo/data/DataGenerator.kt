@@ -64,7 +64,7 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
                 val listSize = list.size
                 val rentalList = mutableListOf<RentalEntity>()
                 // Generate a specific number of rentals, unevenly distributed among media items.
-                for (i in 0..50) {
+                for (i in 0..25) {
                     val itemId = list[random.nextInt(listSize)].mediaItemId!!
                     val rental = RentalEntity(
                         rentalMediaId = itemId,
