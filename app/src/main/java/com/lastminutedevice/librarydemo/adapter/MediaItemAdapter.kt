@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lastminutedevice.librarydemo.R
-import com.lastminutedevice.librarydemo.data.MediaItemData
 import com.lastminutedevice.librarydemo.data.MediaItemEntity
 import com.lastminutedevice.librarydemo.data.RentalEntity
 
