@@ -30,10 +30,13 @@ class ViewAdapter(private val context: Context) : RecyclerView.Adapter<MediaItem
     override fun onBindViewHolder(holder: MediaItemViewHolder, position: Int) {
         val itemData = data[position]
         holder.titleView.text = itemData.mediaItem.title
-        holder.detailsView.text = holder
-            .detailsView
-            .resources
-            .getString(R.string.media_item_details, itemData.mediaItem.type, itemData.rentals.size)
+        holder.detailsView.run {
+            text = resources.getString(
+                R.string.media_item_details,
+                itemData.mediaItem.id,
+                itemData.mediaItem.type,
+                itemData.rentals.size)
+        }
     }
 
     override fun getItemCount(): Int {
