@@ -56,14 +56,15 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
     }
 
     /**
-     * Add some randomly generated rentals.
+     * Add some randomly generated rentals and editions.
      */
     private fun generateRentals() {
         dao.getAllMediaItems()
             .subscribe { list ->
                 val listSize = list.size
-                val rentalList = mutableListOf<RentalEntity>()
+
                 // Generate a specific number of rentals, unevenly distributed among media items.
+                val rentalList = mutableListOf<RentalEntity>()
                 for (i in 0..25) {
                     val itemId = list[random.nextInt(listSize)].mediaItemId!!
                     val rental = RentalEntity(
@@ -73,6 +74,15 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
                     rentalList.add(rental)
                 }
                 dao.addRentals(rentalList).subscribe()
+
+                // Generate some arbitrary editions for a random distribution of media items.
+                val editionList = mutableListOf<EditionEntity>()
+                for (j in 0..25) {
+                    val itemId = list[random.nextInt(listSize)].mediaItemId!!
+                    val edition = EditionEntity(editionMediaId = itemId)
+                    editionList.add(edition)
+                }
+                dao.addEditions(editionList).subscribe()
             }
     }
 

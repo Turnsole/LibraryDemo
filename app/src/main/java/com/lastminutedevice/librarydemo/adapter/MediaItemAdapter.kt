@@ -7,21 +7,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lastminutedevice.librarydemo.R
 import com.lastminutedevice.librarydemo.data.MediaItemEntity
-import com.lastminutedevice.librarydemo.data.RentalEntity
+import com.lastminutedevice.librarydemo.data.MediaRelation
 
 /**
  * Adapter for all the items in the big list.
  */
 class MediaItemAdapter(private val context: Context) : RecyclerView.Adapter<MediaItemViewHolder>() {
 
-    private val data: MutableList<MediaItemData> = mutableListOf()
+    private val data: MutableList<MediaRelation> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged") // Values only change when search changes.
-    fun resetData(newData: Map<MediaItemEntity, List<RentalEntity>>) {
+    fun resetData(newData: Map<MediaItemEntity, List<MediaRelation>>) {
         data.clear()
 
         // The adapter is a ListAdapter, so transform the results.
-        val list = newData.map { entry -> MediaItemData(entry.key, entry.value) }
+        val list = newData.map { entry -> entry.value[0] }
         data.addAll(list)
 
         notifyDataSetChanged()
@@ -37,13 +37,14 @@ class MediaItemAdapter(private val context: Context) : RecyclerView.Adapter<Medi
 
     override fun onBindViewHolder(holder: MediaItemViewHolder, position: Int) {
         val itemData = data[position]
-        holder.titleView.text = itemData.mediaItem.title
+        holder.titleView.text = itemData.mediaItemEntity.title
         holder.detailsView.run {
             text = resources.getString(
                 R.string.media_item_details,
-                itemData.mediaItem.mediaItemId,
-                itemData.mediaItem.type,
-                itemData.rentals.size)
+                itemData.mediaItemEntity.mediaItemId,
+                itemData.mediaItemEntity.type,
+                itemData.rentals.size,
+                itemData.editions.size)
         }
     }
 

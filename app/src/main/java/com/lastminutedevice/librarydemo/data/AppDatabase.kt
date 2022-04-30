@@ -5,7 +5,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    entities = [MediaItemEntity::class, MediaTypeEntity::class, UserEntity::class, RentalEntity::class],
+    entities = [
+        MediaItemEntity::class,
+        MediaTypeEntity::class,
+        UserEntity::class,
+        RentalEntity::class,
+        EditionEntity::class
+    ],
     version = 1
 )
 @TypeConverters(MediaTypeConverter::class)

@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { items ->
                 findViewById<TextView>(R.id.search_summary).run {
-                    text = resources.getString(R.string.search_summary, items.size, mediaType.typeName)
+                    text = resources.getString(R.string.search_summary, items.values.size, mediaType.typeName)
                 }
                 mediaItemAdapter.resetData(newData = items)
             }
