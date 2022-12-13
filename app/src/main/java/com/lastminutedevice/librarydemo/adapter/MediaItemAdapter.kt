@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lastminutedevice.librarydemo.R
-import com.lastminutedevice.librarydemo.data.MediaItemEntity
 import com.lastminutedevice.librarydemo.data.MediaRelation
 
 /**
@@ -17,12 +16,9 @@ class MediaItemAdapter(private val context: Context) : RecyclerView.Adapter<Medi
     private val data: MutableList<MediaRelation> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged") // Values only change when search changes.
-    fun resetData(newData: Map<MediaItemEntity, List<MediaRelation>>) {
+    fun resetData(newData: List<MediaRelation>) {
         data.clear()
-
-        // The adapter is a ListAdapter, so transform the results.
-        val list = newData.map { entry -> entry.value[0] }
-        data.addAll(list)
+        data.addAll(newData)
 
         notifyDataSetChanged()
     }

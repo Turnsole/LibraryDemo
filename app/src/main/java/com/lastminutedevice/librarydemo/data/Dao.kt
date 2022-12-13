@@ -34,13 +34,13 @@ interface Dao {
     @Query("select * from media_items")
     fun getAllMediaItems(): Single<List<MediaItemEntity>>
 
-    @Query("select * from media_items left join editions on media_items.mediaItemId = editions.editionMediaId left join rentals on media_items.mediaItemId = rentals.rentalMediaId where media_items.type = :mediaType order by media_items.mediaItemId")
-    fun getAllItemsOfType(mediaType: MediaType): Single<Map<MediaItemEntity, List<MediaRelation>>>
+    @Query("select * from media_items where type = :mediaType order by mediaItemId")
+    fun getAllItemsOfType(mediaType: MediaType): Single<List<MediaRelation>>
 
     @Transaction
-    @Query("select * from media_items left join editions on media_items.mediaItemId = editions.editionMediaId left join rentals on media_items.mediaItemId = rentals.rentalMediaId where media_items.type = :mediaType and userId = :userId order by media_items.mediaItemId")
+    @Query("select * from media_items left join rentals on media_items.mediaItemId = rentals.rentalMediaId where media_items.type = :mediaType and userId = :userId order by media_items.mediaItemId")
     fun getUsersRentals(
         mediaType: MediaType,
         userId: Int
-    ): Single<Map<MediaItemEntity, List<MediaRelation>>>
+    ): Single<List<MediaRelation>>
 }

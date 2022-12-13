@@ -3,17 +3,22 @@ package com.lastminutedevice.librarydemo.data
 import com.lastminutedevice.librarydemo.MediaType
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.*
+import kotlin.collections.ArrayDeque
 import kotlin.random.Random
 
 class DataGenerator(private val dao: Dao, private val userId: Int) {
 
     private val random = Random(System.currentTimeMillis())
 
-    private val seedWords = listOf(
-        "apple", "dirt", "brick", "ship", "storm", "softly", "waving", "deciduous", "sky", "moss", "yule"
-    )
+    private val titles = ArrayDeque<String>()
+
+    private val maxNumberItems = 25
 
     fun fillDatabase() {
+
+        generateTitles()
+
         generateTypes()
             .andThen(generateItems())
             .andThen(generateUser())
@@ -37,9 +42,9 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
      */
     private fun generateItems(): Completable {
         val items = mutableListOf<MediaItemEntity>()
-        for (i in 1..25) {
+        for (i in 1..maxNumberItems) {
             val newItem = MediaItemEntity(
-                title = generateTitle(),
+                title = titles.removeFirst(),
                 type = MediaType.values().random()
             )
             items.add(newItem)
@@ -65,7 +70,7 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
 
                 // Generate a specific number of rentals, unevenly distributed among media items.
                 val rentalList = mutableListOf<RentalEntity>()
-                for (i in 0..25) {
+                for (i in 0..maxNumberItems) {
                     val itemId = list[random.nextInt(listSize)].mediaItemId!!
                     val rental = RentalEntity(
                         rentalMediaId = itemId,
@@ -77,7 +82,7 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
 
                 // Generate some arbitrary editions for a random distribution of media items.
                 val editionList = mutableListOf<EditionEntity>()
-                for (j in 0..25) {
+                for (j in 0..maxNumberItems) {
                     val itemId = list[random.nextInt(listSize)].mediaItemId!!
                     val edition = EditionEntity(editionMediaId = itemId)
                     editionList.add(edition)
@@ -87,13 +92,19 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
     }
 
     /**
-     * Randomly choose between 1 and 3 words from the list to form a title.
+     * Randomly choose between 1 and 3 words from the list to form a unique title, which will
+     * be added to the deque for use for each media type.
      */
-    private fun generateTitle(): String {
-        val result = mutableListOf<String>()
-        for (i in 0..random.nextInt(0, 3)) {
-            result.add(seedWords.random())
+    private fun generateTitles()  {
+        val titleSet = mutableSetOf<String>()
+        val seedWords = listOf("Apple", "Dirt", "Brick", "Ship", "Storm", "Softly", "Waving", "Deciduous", "Sky", "Moss", "Yule")
+        while (titleSet.size <= maxNumberItems) {
+            val result = mutableSetOf<String>()
+            for (i in 0..random.nextInt(0, 4)) {
+                result.add(seedWords.random())
+            }
+            titleSet.add(result.joinToString(" "))
         }
-        return result.joinToString(" ").replaceFirstChar { it.uppercase() }
+        titles.addAll(titleSet)
     }
 }
