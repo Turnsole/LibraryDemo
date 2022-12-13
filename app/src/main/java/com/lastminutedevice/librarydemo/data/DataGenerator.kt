@@ -10,7 +10,7 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
     private val random = Random(System.currentTimeMillis())
 
     private val seedWords = listOf(
-        "apple", "dirt", "brick", "ship", "storm", "softly", "waving", "deciduous"
+        "apple", "dirt", "brick", "ship", "storm", "softly", "waving", "deciduous", "sky", "moss", "yule"
     )
 
     fun fillDatabase() {
@@ -91,9 +91,9 @@ class DataGenerator(private val dao: Dao, private val userId: Int) {
      */
     private fun generateTitle(): String {
         val result = mutableListOf<String>()
-        for (i in 0..random.nextInt(1, 3)) {
+        for (i in 0..random.nextInt(0, 3)) {
             result.add(seedWords.random())
         }
-        return result.joinToString(" ")
+        return result.joinToString(" ").replaceFirstChar { it.uppercase() }
     }
 }
